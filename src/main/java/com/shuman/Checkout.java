@@ -31,6 +31,7 @@ public class Checkout {
     public Double total() {
         // copying basket so that we don't loose initial prices
         final var basketCopy = new HashMap<>(basket);
+        // applying promotions only when calculation total, because we don't need to show discounted price per product
         promotions.forEach(promotion -> promotion.accept(basketCopy));
         final var total = basketCopy.values().stream()
             .mapToDouble(BasketEntry::total)
